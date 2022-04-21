@@ -38,7 +38,7 @@ public class Frame {
 			// Get the current location of the player; defaults to starting coordinates
 			playerLocation = player.getPosition();
 			// Check the available movement options
-			openDirections = player.checkSpaces();
+			openDirections = player.getMovementOptions();
 			// Get the number of movement options available
 			moveOptions = player.getNumberOfOptions();
 			

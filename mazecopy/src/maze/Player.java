@@ -41,7 +41,7 @@ public class Player {
 	}
 	
 	// Method to check for the win condition and surrounding spaces' status. Returns a char array with all open directions and also increments numOptions
-	public char[] checkSpaces() {
+	public char[] getMovementOptions() {
 		
 		for (int i = 0; i < openDirections.length; i++) {
 			openDirections[i] = 'o';
