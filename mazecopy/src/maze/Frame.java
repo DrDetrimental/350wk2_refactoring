@@ -18,7 +18,6 @@ public class Frame {
 	private static boolean loop = true;
 	private static char[] openDirections;
 	private static int[] playerLocation;
-	private static int moveOptions;
 
 	/**
 	 * Launch the application.
@@ -39,16 +38,6 @@ public class Frame {
 			playerLocation = player.getPosition();
 			// Check the available movement options
 			openDirections = player.getMovementOptions();
-			// Get the number of movement options available
-			moveOptions = player.getNumberOfOptions();
-			
-			/**
-			 * Add logic for pushing fork positions to the stack here?
-			 * 
-			 * Place relocation code in case of dead ends here before it tries to move.
-			 * 
-			 * After exhausting all of a fork's options, pop it from the stack?
-			 */
 			
 			// Movement. Checks if the player is sitting on the end space, and if so, wins the game; if not, will
 			// mark the space the player is in as "closed" and move into an available space in the order N, E, S, W

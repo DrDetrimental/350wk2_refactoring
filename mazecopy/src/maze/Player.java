@@ -88,10 +88,6 @@ public class Player {
 	}
 	
 	// Getters and setters
-	public int getNumberOfOptions() {
-		return numOptions;
-	}
-	
 	public int[] getPosition() {
 		return playerCoords;
 	}
