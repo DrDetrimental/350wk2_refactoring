@@ -16,8 +16,6 @@ public class Frame {
 	private static int[][] maze;
 	private static JLabel[][] spaces;
 	private static boolean loop = true;
-	private static char[] openDirections;
-	private static int[] playerLocation;
 
 	/**
 	 * Launch the application.
@@ -34,36 +32,31 @@ public class Frame {
 		// Game loop
 		while (loop) {
 			
-			// Get the current location of the player; defaults to starting coordinates
-			playerLocation = player.getPosition();
-			// Check the available movement options
-			openDirections = player.getMovementOptions();
-			
 			// Movement. Checks if the player is sitting on the end space, and if so, wins the game; if not, will
 			// mark the space the player is in as "closed" and move into an available space in the order N, E, S, W
-			for (int i = 0; i < openDirections.length; i++) {
-				if (openDirections[i] != 'x') {
+			for (int i = 0; i < player.getMovementOptions().length; i++) {
+				if (player.getMovementOptions()[i] != 'x') {
 					
 					// Mark the square the player is currently in as closed
-					maze[playerLocation[0]][playerLocation[1]] = 0;
-					spaces[playerLocation[0]][playerLocation[1]].setText("x");
+					maze[player.getPosition()[0]][player.getPosition()[1]] = 0;
+					spaces[player.getPosition()[0]][player.getPosition()[1]].setText("x");
 					
-					if (openDirections[i] == 'n') {
+					if (player.getMovementOptions()[i] == 'n') {
 						System.out.println("Moving north");
 						player.moveNorth();
 						break;
 					}
-					if (openDirections[i] == 'e') {
+					if (player.getMovementOptions()[i] == 'e') {
 						System.out.println("Moving east");
 						player.moveEast();
 						break;
 					}
-					if (openDirections[i] == 's') {
+					if (player.getMovementOptions()[i] == 's') {
 						System.out.println("Moving south");
 						player.moveSouth();
 						break;
 					}
-					if (openDirections[i] == 'w') {
+					if (player.getMovementOptions()[i] == 'w') {
 						System.out.println("Moving west");
 						player.moveWest();
 						break;
@@ -75,7 +68,7 @@ public class Frame {
 				}
 			}
 			// Sets the player's new position as "O" to show where they are on the grid
-			spaces[playerLocation[0]][playerLocation[1]].setText("O");
+			spaces[player.getPosition()[0]][player.getPosition()[1]].setText("O");
 			
 			try {
 				Thread.sleep(500);
