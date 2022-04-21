@@ -25,45 +25,11 @@ public class Frame {
 	 */
 	public static void main(String[] args) {
 		
-		// Read the file and generate the maze array & all related data
-		try {
-			Maze.readFile("maze.txt");
-		} catch (Exception e) {
-			System.out.println("Something went wrong reading the file, is the filename right?");
-			e.printStackTrace();
-		}
-		
-		// Get information about the maze in local variables
-		mazeHeight = Maze.getHeight();
-		mazeWidth = Maze.getWidth();
-		maze = Maze.getMaze();
-		spaces = new JLabel[mazeHeight][mazeWidth];
+		readMazeFile();
+		getMazeInfo();
 		Player player = new Player();
-		
-		// Create the window
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Frame window = new Frame();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-		
-		for (int y = 0; y < mazeHeight; y++) {
-			for (int x = 0; x < mazeWidth; x++) {
-				JLabel lblNewLabel;
-				if (maze[y][x] == 0) {
-					lblNewLabel = new JLabel("X");
-				} else {
-					lblNewLabel = new JLabel("");
-				}
-				spaces[y][x] = lblNewLabel;
-			}
-		}
-		
+		createGameWindow();
+		drawMaze();
 		spaces[Maze.getEndCoords()[0]][Maze.getEndCoords()[1]].setText("F");
 		
 		// Game loop
@@ -128,6 +94,49 @@ public class Frame {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+	}
+
+	private static void drawMaze() {
+		for (int y = 0; y < mazeHeight; y++) {
+			for (int x = 0; x < mazeWidth; x++) {
+				JLabel lblNewLabel;
+				if (maze[y][x] == 0) {
+					lblNewLabel = new JLabel("X");
+				} else {
+					lblNewLabel = new JLabel("");
+				}
+				spaces[y][x] = lblNewLabel;
+			}
+		}
+	}
+
+	private static void createGameWindow() {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Frame window = new Frame();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	private static void getMazeInfo() {
+		mazeHeight = Maze.getHeight();
+		mazeWidth = Maze.getWidth();
+		maze = Maze.getMaze();
+		spaces = new JLabel[mazeHeight][mazeWidth];
+	}
+
+	private static void readMazeFile() {
+		try {
+			Maze.readFile("maze.txt");
+		} catch (Exception e) {
+			System.out.println("Something went wrong reading the file, is the filename right?");
+			e.printStackTrace();
 		}
 	}
 
