@@ -32,41 +32,7 @@ public class Frame {
 		// Game loop
 		while (loop) {
 			
-			// Movement. Checks if the player is sitting on the end space, and if so, wins the game; if not, will
-			// mark the space the player is in as "closed" and move into an available space in the order N, E, S, W
-			for (int i = 0; i < player.getMovementOptions().length; i++) {
-				if (player.getMovementOptions()[i] != 'x') {
-					
-					// Mark the square the player is currently in as closed
-					maze[player.getPosition()[0]][player.getPosition()[1]] = 0;
-					spaces[player.getPosition()[0]][player.getPosition()[1]].setText("x");
-					
-					if (player.getMovementOptions()[i] == 'n') {
-						System.out.println("Moving north");
-						player.moveNorth();
-						break;
-					}
-					if (player.getMovementOptions()[i] == 'e') {
-						System.out.println("Moving east");
-						player.moveEast();
-						break;
-					}
-					if (player.getMovementOptions()[i] == 's') {
-						System.out.println("Moving south");
-						player.moveSouth();
-						break;
-					}
-					if (player.getMovementOptions()[i] == 'w') {
-						System.out.println("Moving west");
-						player.moveWest();
-						break;
-					}
-					
-				} else {
-					System.out.println("Player win!");
-					loop = false;
-				}
-			}
+			handleMovement(player);
 			// Sets the player's new position as "O" to show where they are on the grid
 			spaces[player.getPosition()[0]][player.getPosition()[1]].setText("O");
 			
@@ -75,6 +41,44 @@ public class Frame {
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}
+		}
+	}
+
+	private static void handleMovement(Player player) {
+		// Movement. Checks if the player is sitting on the end space, and if so, wins the game; if not, will
+		// mark the space the player is in as "closed" and move into an available space in the order N, E, S, W
+		for (int i = 0; i < player.getMovementOptions().length; i++) {
+			if (player.getMovementOptions()[i] != 'x') { // If not on the end space...
+				
+				// Mark the square the player is currently in as closed
+				maze[player.getPosition()[0]][player.getPosition()[1]] = 0;
+				spaces[player.getPosition()[0]][player.getPosition()[1]].setText("x");
+				
+				if (player.getMovementOptions()[i] == 'n') {
+					System.out.println("Moving north");
+					player.moveNorth();
+					break;
+				}
+				if (player.getMovementOptions()[i] == 'e') {
+					System.out.println("Moving east");
+					player.moveEast();
+					break;
+				}
+				if (player.getMovementOptions()[i] == 's') {
+					System.out.println("Moving south");
+					player.moveSouth();
+					break;
+				}
+				if (player.getMovementOptions()[i] == 'w') {
+					System.out.println("Moving west");
+					player.moveWest();
+					break;
+				}
+				
+			} else {
+				System.out.println("Player win!");
+				loop = false;
 			}
 		}
 	}
